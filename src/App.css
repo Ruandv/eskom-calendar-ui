@@ -41,9 +41,8 @@ body {
 }
 .menu {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  text-align: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .main {

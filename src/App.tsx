@@ -136,7 +136,7 @@ function App() {
                         </li>
                       );
                     })}
-                  <li>
+                  <li className={`nav-item menu`}>
                     <ThemeToggel
                       currentValue={theme}
                       onToggle={toggleTheme}
