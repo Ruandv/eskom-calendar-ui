@@ -1,4 +1,5 @@
 import useLocalStorage from "use-local-storage";
+
 import {
   IAsset,
   IMachineDataResponse,
@@ -8,6 +9,9 @@ import {
 } from "./interfaces/github";
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import "./assets/css/ollie.css";
+import brand from "./assets/imgs/brand.png";
+import brand2 from "./assets/imgs/brand2.png";
 import CalendarDataService from "./services/CalendarDataService";
 import ThemeToggel from "./components/theme-toggel/theme-toggel";
 import { Themes } from "./enums/enums";
@@ -49,33 +53,6 @@ function App() {
     setAssetData(groupedAreas.data);
   };
 
-  const getTopDownloads = () => {
-    if (gitHubAssets.length > 0) {
-      var c = gitHubAssets!.filter((x) => x.download_count > 0);
-      c = c
-        .sort((a, b) => (a.download_count > b.download_count ? -1 : 1))
-        .slice(0, 5);
-
-      var topDownloads = (
-        <div>
-          <header>Top 5 downloaded files</header>
-          <ul>
-            {c.map((x) => {
-              return (
-                <li>
-                  <a className=" " href={x.browser_download_url}>
-                    {x.name} - {x.download_count}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      );
-      return topDownloads;
-    }
-  };
-
   useEffect(() => {
     const fetchProvinceListData = async () => {
       var d = await calServ.current.fetchProvinceList();
@@ -113,28 +90,63 @@ function App() {
   return (
     <>
       <div className="App" data-theme={theme}>
-        <div className="section-secondary-title">
-          Eskom Calendar Portal
-          <ThemeToggel
-            currentValue={theme}
-            onToggle={toggleTheme}
-          ></ThemeToggel>
-        </div>
         <div className="content">
-          <div className="menu">
-            {provinceList.length > 0 &&
-              provinceList.map((x, i) => {
-                return (
-                  <div
-                    key={i}
-                    className="btns"
-                    onClick={() => fetchAssets(x.key)}
-                  >
-                    {x.value}
-                  </div>
-                );
-              })}
-          </div>
+          <nav
+            id="scrollspy"
+            className={`navbar navbar-${theme} bg-${theme} navbar-expand-lg fixed-top affix`}
+          >
+            <div className="container">
+              <a
+                className="navbar-brand"
+                href="https://www.free-css.com/free-css-templates"
+              >
+                <img
+                  src={theme === Themes.Light ? brand2 : brand}
+                  alt="logo"
+                  className="brand-img"
+                ></img>
+              </a>
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div
+                className="collapse navbar-collapse"
+                id="navbarSupportedContent"
+              >
+                <ul className="navbar-nav ml-auto">
+                  {provinceList.length > 0 &&
+                    provinceList.map((x, i) => {
+                      return (
+                        <li className="nav-item">
+                          <a
+                            className="nav-link text-capitalize"
+                            href="#"
+                            onClick={() => fetchAssets(x.key)}
+                          >
+                            {x.value}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  <li>
+                    <ThemeToggel
+                      currentValue={theme}
+                      onToggle={toggleTheme}
+                    ></ThemeToggel>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
           <div
             className={`${"main"} ${
               assetData.length > 0 ? "icsContainer" : ""
@@ -162,24 +174,28 @@ function App() {
                   </select>
                 </div>
                 {downloadData && (
+                  <>
+                    <div>
+                      <div className={`downloadHolder ${theme}`}>
+                        <div>Calendar file :</div>
+                        <div>
+                          <EskomCard
+                            theme={theme}
+                            downloadData={downloadData}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
+                {downloadData && (
                   <div>
                     <LoadsheddingCalendar
+                      theme={theme}
                       eventCalendarName={downloadData?.name}
                     ></LoadsheddingCalendar>
                   </div>
                 )}
-              </>
-            )}
-            {downloadData && (
-              <>
-                <div>
-                  <div className="downloadHolder">
-                    <div>Calendar file :</div>
-                    <div>
-                      <EskomCard downloadData={downloadData} />
-                    </div>
-                  </div>
-                </div>
               </>
             )}
           </div>

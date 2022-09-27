@@ -10,16 +10,19 @@ export interface IThemeToggle {
 function ThemeToggel({ onToggle, currentValue }: IThemeToggle) {
   const [theme, setTheme] = useState<Themes>(currentValue);
   return (
-    <div className={`${styles.ThemeToggel}`} data-testid="ThemeToggel" onClick={() => {
-      setTheme(theme === Themes.Dark ? Themes.Light : Themes.Dark);
-      onToggle(theme === Themes.Dark ? Themes.Light : Themes.Dark);
-    }}>
-      <div  data-testid="ThemeToggelButton"
-        className={`${styles.button} ${
-          theme == Themes.Dark ? styles.darkTheme : styles.lightTheme
-        }`}
+    <div
+      className={`${styles.ThemeToggel} ${styles[theme]}`}
+      data-testid="ThemeToggel"
+      onClick={() => {
+        setTheme(theme === Themes.Dark ? Themes.Light : Themes.Dark);
+        onToggle(theme === Themes.Dark ? Themes.Light : Themes.Dark);
+      }}
+    >
+      <div
+        data-testid="ThemeToggelButton"
+        className={`${styles.button} ${styles[theme]}`}
       >
-        x
+        &nbsp;
       </div>
     </div>
   );

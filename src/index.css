@@ -1,33 +1,35 @@
 body {
   margin: 0;
-  background-color: #282c34;   
-  height: 100%;    
+  background-color: #282c34;
+  height: 100%;
   padding: 0;
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
 }
-
+/* 
 :root {
-  --background: #282c34;
-  --text-primary: #f7f7f7;
-  --text-secondary: #dddddd;
-  --accent: #666666;
+  --background: 12, 59, 77;
+  --text-primary: 2, 254, 255;
+  --text-secondary: 221, 221, 221;
+  --accent: 102, 102, 102;
 }
 
-[data-theme='light'] {
-  --background: #aaaaaa;
-  --text-primary: white;
-  --text-secondary: grey;
-  --accent: #666666;
+[data-theme="light"] {
+  --background: 170, 170, 170;
+  --text-primary: 255, 255, 255;
+  --text-secondary: 0, 255, 255;
+  --accent: 102, 102, 102;
 
-  --primary-background: #FdFe3e;
-  --primary-border: #eE32C2;
+  --primary-background: #fdfe3e;
+  --primary-border: #ee32c2;
   --primary-background-disabled: #106161;
-}
-
-
+} */
 
 .btns {
-  border: 1px solid var(--text-primary);
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(var(--text-primary));
+  background-color: rgb(var(--background));
+  color: var(--text-secondary);
   border-radius: 5px;
   margin: 3px;
   padding: 3px;

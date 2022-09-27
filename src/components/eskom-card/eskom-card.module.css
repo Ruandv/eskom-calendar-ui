@@ -6,15 +6,24 @@
   display: flex;
   padding: 5px;
   flex-direction: column;
-  border: 2px solid var(--primary-border);
+  border: 2px solid ;
   border-radius: 5px;
   min-width: 250px;
   min-height: 300px;
   display: flex;
   background: rgb(2, 0, 14);
-  background: linear-gradient(0deg, var(--background) 0%, #101a9d 100%);
+  background: linear-gradient(0deg, grey 0%, #101a9d 100%);
   background-size: 100% 100%;
   padding-bottom: 60px;
+}
+
+.light {
+  color: black;
+  /* background-color: rgba(255,255,255,0.3); */
+}
+.dark {
+  color: white;
+  /* background-color: rgba(52, 58, 64,0.3); */
 }
 .card .cardHeading {
   height: 80px;
@@ -57,12 +66,7 @@
   padding: 5px;
 }
 .suburb {
-  border-radius: 3px;
-  background-color: aliceblue;
-  opacity: 0.8;
-  padding: 2px;
   margin: auto;
   text-transform: capitalize;
-  color: black;
-  padding: 5px;
+  padding: 2px;
 }

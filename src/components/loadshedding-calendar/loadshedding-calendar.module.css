@@ -1,9 +1,15 @@
 .LoadsheddingCalendar {
 }
-
+.light {
+  color: #343a40;
+  background-color: rgba(255,255,255,0.3);
+}
+.dark {
+  color: white;
+  background-color: rgba(52, 58, 64,0.3);
+}
 @media (max-width: 576px) {
-    .fullCalendarContainer {
-      display: none;
-    }
+  .fullCalendarContainer {
+    display: none;
   }
-  
+}

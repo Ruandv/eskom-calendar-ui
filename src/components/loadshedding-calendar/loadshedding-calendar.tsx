@@ -3,12 +3,15 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import timeGridPlugin from "@fullcalendar/timegrid";
 import iCalendarPlugin from "@fullcalendar/icalendar";
 import styles from "./loadshedding-calendar.module.css";
+import { Themes } from "../../enums/enums";
 export interface ILoadsheddingCalendar {
   eventData?: any[];
+  theme: Themes;
   eventCalendarName?: string;
 }
 
 function LoadsheddingCalendar({
+  theme,
   eventData,
   eventCalendarName,
 }: ILoadsheddingCalendar) {
@@ -22,7 +25,7 @@ function LoadsheddingCalendar({
   }
 
   return (
-    <div className={`${styles.fullCalendarContainer}`}>
+    <div className={`${styles.fullCalendarContainer} ${styles[theme]}`}>
       <FullCalendar
         themeSystem="bootstrap5"
         plugins={[timeGridPlugin, iCalendarPlugin]}
