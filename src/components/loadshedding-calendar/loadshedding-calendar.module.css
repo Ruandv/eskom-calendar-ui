@@ -1,0 +1,9 @@
+.LoadsheddingCalendar {
+}
+
+@media (max-width: 576px) {
+    .fullCalendarContainer {
+      display: none;
+    }
+  }
+  

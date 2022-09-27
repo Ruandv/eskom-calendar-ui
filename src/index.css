@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  background-color: #282c34;   
+  height: 100%;    
+  padding: 0;
+  font-family: 'Libre Baskerville', serif;
+}
+
+:root {
+  --background: #282c34;
+  --text-primary: #f7f7f7;
+  --text-secondary: #dddddd;
+  --accent: #666666;
+}
+
+[data-theme='light'] {
+  --background: #aaaaaa;
+  --text-primary: white;
+  --text-secondary: grey;
+  --accent: #666666;
+
+  --primary-background: #FdFe3e;
+  --primary-border: #eE32C2;
+  --primary-background-disabled: #106161;
+}
+
+
+
+.btns {
+  border: 1px solid var(--text-primary);
+  border-radius: 5px;
+  margin: 3px;
+  padding: 3px;
+  text-transform: capitalize;
+}
+
+.btns:hover {
+  cursor: pointer;
+}
