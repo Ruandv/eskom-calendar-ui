@@ -1,0 +1,49 @@
+.PagesHome {
+}
+
+.light {
+  color: #343a40;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.dark {
+  color: white;
+  background-color: rgba(52, 58, 64, 0.3);
+}
+
+.filters {
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+}
+.filters label {
+  padding: 0;
+  margin: 0;
+  padding-right: 3px;
+}
+.filters select {
+  text-transform: capitalize;
+  min-width: 200px;
+}
+
+.main {
+  padding: 100px 10px 10px 10px;
+  width: 100%;
+}
+
+.downloadHolder {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+@media (max-width: 576px) {
+  body {
+    background-color: #115410;
+  }
+
+  .downloadHolder {
+    flex-direction: column;
+  }
+}

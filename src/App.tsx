@@ -1,12 +1,5 @@
 import useLocalStorage from "use-local-storage";
-
-import {
-  IAsset,
-  IMachineDataResponse,
-  IMyMachineData,
-  IMyMachineDataGrouped,
-  IProvince,
-} from "./interfaces/github";
+import { IProvince } from "./interfaces/github";
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import "./assets/css/ollie.css";
@@ -15,19 +8,19 @@ import brand2 from "./assets/imgs/brand2.png";
 import CalendarDataService from "./services/CalendarDataService";
 import ThemeToggel from "./components/theme-toggel/theme-toggel";
 import { Themes } from "./enums/enums";
-import LoadsheddingCalendar from "./components/loadshedding-calendar/loadshedding-calendar";
-import EskomCard from "./components/eskom-card/eskom-card";
-import TopDownloads from "./components/top-downloads/top-downloads";
+import PagesHome from "./pages/Home/Home";
+import { Route, Routes } from "react-router-dom";
+import Search from "./components/search/search";
 
 function App() {
   let calServ = useRef<CalendarDataService>(CalendarDataService.getInstance());
 
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const ddlRef = useRef(null);
   const [theme, setTheme] = useLocalStorage(
     "theme",
     defaultDark ? Themes.Dark : Themes.Light
   );
+  const [assetName, setAssetName] = useState<string>("");
 
   const toggleTheme = () => {
     if (theme == Themes.Light) {
@@ -36,22 +29,9 @@ function App() {
       setTheme(Themes.Light);
     }
   };
-
-  const [gitHubAssets, setGitHubAssets] = useState<IAsset[]>({} as IAsset[]);
-  const [machineData, setMachineData] = useState<IMyMachineData[]>();
-
   const [provinceList, setProvinceList] = useState<IProvince[]>(
     {} as IProvince[]
   );
-  const [downloadData, setDownloadData] = useState<IAsset>();
-  const [assetData, setAssetData] = useState<IMyMachineDataGrouped[]>(
-    {} as IMyMachineDataGrouped[]
-  );
-  const fetchAssets = async (e: any) => {
-    var groupedAreas = await calServ.current.fetchGroupedAreaData(e);
-    setDownloadData(undefined);
-    setAssetData(groupedAreas.data);
-  };
 
   useEffect(() => {
     const fetchProvinceListData = async () => {
@@ -59,34 +39,8 @@ function App() {
       setProvinceList(d);
     };
 
-    const fetchLatestData = async () => {
-      var md: IMachineDataResponse =
-        await calServ.current.fetchLatestMachineData(0, 1000);
-      var mdres: IMyMachineData[] = [] as IMyMachineData[];
-
-      while (md.lastRecord !== md.totalRecords) {
-        mdres.push(...md.data);
-        md = await calServ.current.fetchLatestMachineData(md.lastRecord, 500);
-      }
-      mdres.push(...md.data);
-      setMachineData(mdres);
-    };
-
     fetchProvinceListData();
-    fetchLatestData();
   }, []);
-
-  useEffect(() => {
-    if (assetData.length > 0) {
-      (ddlRef.current as any).scrollIntoView(true);
-    }
-  }, [assetData]);
-
-  const fetchAssetByAreaName = async (areaName: string) => {
-    var data = await calServ.current.getAssetDataByCalendarName(areaName);
-    setDownloadData(data);
-  };
-
   return (
     <>
       <div className="App" data-theme={theme}>
@@ -129,7 +83,7 @@ function App() {
                           <a
                             className="nav-link text-capitalize"
                             href="#"
-                            onClick={() => fetchAssets(x.key)}
+                            onClick={() => setAssetName(x.key)}
                           >
                             {x.value}
                           </a>
@@ -146,61 +100,16 @@ function App() {
               </div>
             </div>
           </nav>
-
-          <div
-            className={`${"main"} ${
-              assetData.length > 0 ? "icsContainer" : ""
-            }`}
-          >
-            {assetData.length > 0 && (
-              <>
-                <div className="filters">
-                  <label>Filter </label>
-                  <select
-                    ref={ddlRef}
-                    onChange={(e) => {
-                      fetchAssetByAreaName(e.target.value);
-                    }}
-                  >
-                    <option key={0}>Select</option>
-                    {assetData.length > 0 &&
-                      assetData.map((x: IMyMachineDataGrouped, i) => {
-                        return (
-                          <option key={i + x.area_name} value={x.area_name}>
-                            {x.area_name}
-                          </option>
-                        );
-                      })}
-                  </select>
-                </div>
-                {downloadData && (
-                  <>
-                    <div>
-                      <div className={`downloadHolder ${theme}`}>
-                        <div>Calendar file :</div>
-                        <div>
-                          <EskomCard
-                            theme={theme}
-                            downloadData={downloadData}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </>
-                )}
-                {downloadData && (
-                  <div>
-                    <LoadsheddingCalendar
-                      theme={theme}
-                      eventCalendarName={downloadData?.name}
-                    ></LoadsheddingCalendar>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-          <div>
-            <TopDownloads></TopDownloads>
+          <div className="mainContainer">
+            <Routes>
+              <Route
+                path="/eskom-calendar-ui"
+                element={
+                  <PagesHome theme={theme} assetName={assetName}></PagesHome>
+                }
+              />
+              <Route path="/search" element={<Search theme={theme}></Search>} />
+            </Routes>
           </div>
         </div>
         <div className="footer"></div>

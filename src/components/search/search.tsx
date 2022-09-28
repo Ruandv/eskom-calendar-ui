@@ -1,11 +1,13 @@
-import React, { FC } from "react";
+import { Themes } from "../../enums/enums";
 import styles from "./search.module.css";
 
-interface SearchProps {}
+interface SearchProps {
+  theme:Themes
+}
 
-const Search = ({}: SearchProps) => {
+const Search = ({theme}: SearchProps) => {
   return (
-    <div className={styles.Search} data-testid="Search">
+    <div className={`${styles.Search} ${theme}`} data-testid="Search">
       <div>
         Search for your city / suburb: <input type={"text"}></input>
       </div>

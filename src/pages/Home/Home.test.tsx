@@ -1,15 +1,15 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Search from "./search";
+import PagesHome from "./Home";
 import { Themes } from "../../enums/enums";
 
-describe("<Search />", () => {
+describe("<PagesHome />", () => {
   test("it should mount", () => {
-    render(<Search theme={Themes.Dark} />);
+    render(<PagesHome assetName="" theme={Themes.Dark} />);
 
-    const search = screen.getByTestId("Search");
+    const pagesHome = screen.getByTestId("PagesHome");
 
-    expect(search).toBeInTheDocument();
+    expect(pagesHome).toBeInTheDocument();
   });
 });

@@ -2,8 +2,12 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import styles from "./top-downloads.module.css";
 import CalendarDataService from "../../services/CalendarDataService";
 import { IAsset } from "../../interfaces/github";
+import { Themes } from "../../enums/enums";
 
-function TopDownloads() {
+export interface ITopDownloads {
+  theme: Themes;
+}
+function TopDownloads({ theme }: ITopDownloads) {
   const calServ = useRef(CalendarDataService.getInstance());
   const [topData, setTopData] = useState({} as IAsset[]);
   useEffect(() => {
@@ -20,7 +24,7 @@ function TopDownloads() {
   return (
     <>
       {topData.length > 0 && (
-        <div>
+        <div className={`${theme}`}>
           <header>
             Top 5 downloaded files
             <div>
