@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/eskom-calendar-ui/static/css/main.1b8c1d9f.css",
-    "main.js": "/eskom-calendar-ui/static/js/main.d54a5cc3.js",
+    "main.css": "/eskom-calendar-ui/static/css/main.cadd369c.css",
+    "main.js": "/eskom-calendar-ui/static/js/main.fb6eaad1.js",
     "static/js/787.e15a11e2.chunk.js": "/eskom-calendar-ui/static/js/787.e15a11e2.chunk.js",
     "static/media/background.jpg": "/eskom-calendar-ui/static/media/background.31746e971df78c7beba6.jpg",
     "static/media/header.jpg": "/eskom-calendar-ui/static/media/header.f899cd0395ef83a00bfc.jpg",
@@ -12,12 +12,12 @@
     "static/media/brand2.png": "/eskom-calendar-ui/static/media/brand2.9d5222c2f240d4bdf2ff.png",
     "static/media/brand.png": "/eskom-calendar-ui/static/media/brand.4ecaad07542f263f2f4e.png",
     "index.html": "/eskom-calendar-ui/index.html",
-    "main.1b8c1d9f.css.map": "/eskom-calendar-ui/static/css/main.1b8c1d9f.css.map",
-    "main.d54a5cc3.js.map": "/eskom-calendar-ui/static/js/main.d54a5cc3.js.map",
+    "main.cadd369c.css.map": "/eskom-calendar-ui/static/css/main.cadd369c.css.map",
+    "main.fb6eaad1.js.map": "/eskom-calendar-ui/static/js/main.fb6eaad1.js.map",
     "787.e15a11e2.chunk.js.map": "/eskom-calendar-ui/static/js/787.e15a11e2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1b8c1d9f.css",
-    "static/js/main.d54a5cc3.js"
+    "static/css/main.cadd369c.css",
+    "static/js/main.fb6eaad1.js"
   ]
 }
